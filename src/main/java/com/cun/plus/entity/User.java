@@ -1,5 +1,6 @@
 package com.cun.plus.entity;
 
+
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -11,6 +12,15 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+    private String addr;
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
 
     public Integer getId() {
         return id;

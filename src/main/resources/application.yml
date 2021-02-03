@@ -5,9 +5,9 @@ server:
 spring:
   datasource:
     druid:
-      username: root
-      password: 123
-      url: jdbc:mysql://120.79.197.130:3307/testspring?useSSL=true&verifyServerCertificate=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+      username: zhangning
+      password: 123456
+      url: jdbc:mysql://49.235.166.226:3521/plus?useSSL=true&verifyServerCertificate=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
       driver-class-name: com.mysql.jdbc.Driver
       initial-size: 5
       min-idle: 5
@@ -48,3 +48,4 @@ mybatis-plus:
     cache-enabled: false
     #JdbcTypeForNull
     jdbc-type-for-null: 'null'
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

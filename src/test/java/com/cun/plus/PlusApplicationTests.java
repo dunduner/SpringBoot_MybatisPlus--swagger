@@ -1,6 +1,6 @@
 package com.cun.plus;
 
-import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.cun.plus.entity.User;
 import com.cun.plus.mapper.UserMapper;
@@ -15,7 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 通用 CRUD
+ * @author ning11.zhang
+ * @Description:
+ * @date 2021/2/3
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -125,4 +127,15 @@ public class PlusApplicationTests {
         System.out.println(users2.size());
     }
 
+
+    /**
+     * 6、条件构造器
+     */
+    @Test
+    public void wrapperTest() {
+        List<User> users = userMapper.selectList(new EntityWrapper<User>()
+                .eq("username", "linhongcun")
+        );
+        System.out.println(users.size());
+    }
 }
