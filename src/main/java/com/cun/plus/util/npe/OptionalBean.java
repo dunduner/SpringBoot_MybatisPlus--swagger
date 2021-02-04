@@ -16,51 +16,58 @@ public final class OptionalBean<T> {
 
 
     public static void main(String[] args) {
-        User axin = new User();
-        axin.setName("hello");
-        User.School school = new User.School();
-        school.setAdress("上海市");
-        axin.setSchool(school);
+        UserDemo userDemo = new UserDemo();
+        userDemo.setName("张海宁");
+        UserDemo.School school = new UserDemo.School();
+//        school.setAdress("吉林省");
+        school.setScName("吉林大学");
+        userDemo.setSchool(school);
         // 1. 基本调用
-        String value1 = OptionalBean.ofNullable(axin)
-                .getBean(User::getSchool)
-                .getBean(User.School::getAdress).get();
+        String value1 = OptionalBean.ofNullable(userDemo)
+                .getBean(UserDemo::getSchool)
+                .getBean(UserDemo.School::getAdress).get();
         System.out.println("1. 基本调用:"+value1);
 
         // 2. 扩展的 isPresent方法 用法与 Optional 一样
-        boolean present = OptionalBean.ofNullable(axin)
-                .getBean(User::getSchool)
-                .getBean(User.School::getAdress).isPresent();
+        boolean present = OptionalBean.ofNullable(userDemo)
+                .getBean(UserDemo::getSchool)
+                .getBean(UserDemo.School::getAdress).isPresent();
         System.out.println("地址是否为空："+present);
 
-        boolean present2 = OptionalBean.ofNullable(axin).isPresent();
-        boolean present1 = OptionalBean.ofNullable(axin).getBean(User::getSchool).isPresent();
-        boolean present3 = OptionalBean.ofNullable(axin).getBean(User::getSchool).getBean(User.School::getAdress).isPresent();
-        boolean present4 = OptionalBean.ofNullable(axin).getBean(User::getSchool).getBean(User.School::getScName).isPresent();
+        boolean present2 = OptionalBean.ofNullable(userDemo).isPresent();
+        boolean present1 = OptionalBean.ofNullable(userDemo).getBean(UserDemo::getSchool).isPresent();
+        boolean present3 = OptionalBean.ofNullable(userDemo).getBean(UserDemo::getSchool).getBean(UserDemo.School::getAdress).isPresent();
+        boolean present4 = OptionalBean.ofNullable(userDemo).getBean(UserDemo::getSchool).getBean(UserDemo.School::getScName).isPresent();
 
         // 3. 扩展的 ifPresent 方法
-        OptionalBean.ofNullable(axin)
-                .getBean(User::getSchool)
-                .getBean(User.School::getAdress)
-                .ifPresent(val -> System.out.println(String.format("地址存在:%s", val)));
+        OptionalBean.ofNullable(userDemo)
+                .getBean(UserDemo::getSchool)
+                .getBean(UserDemo.School::getAdress)
+                .ifPresent(val ->
+                        System.out.println(String.format("地址存在:%s", val))
+                );
         System.out.println("===================");
         // 4. 扩展的 orElse
         //如果目标值为空 获取一个默认值
-        String value2 = OptionalBean.ofNullable(axin)
-                .getBean(User::getSchool)
-                .getBean(User.School::getAdress)
+        String value2 = OptionalBean.ofNullable(userDemo)
+                .getBean(UserDemo::getSchool)
+                .getBean(UserDemo.School::getAdress)
                 .orElse("家里蹲");
         System.out.println(value2);
 
         // 5. 扩展的 orElseThrow
         try {
-            String value3 = OptionalBean.ofNullable(axin)
-                    .getBean(User::getSchool)
-                    .getBean(User.School::getAdress).orElseThrow(() -> new RuntimeException("空指针了-我是message的内容"));
+            String value3 = OptionalBean.ofNullable(userDemo)
+                    .getBean(UserDemo::getSchool)
+                    .getBean(UserDemo.School::getAdress).orElseThrow(() ->
+                            new RuntimeException("空指针了-我是message的内容")
+                    );
         } catch (Exception e) {
             System.out.println("ExceptionMessage->"+e.getMessage());
         }
     }
+
+
 
     private static final OptionalBean<?> EMPTY = new OptionalBean<>();
 
@@ -72,7 +79,6 @@ public final class OptionalBean<T> {
 
     /**
      * 空值会抛出空指针
-     *
      * @param value
      */
     private OptionalBean(T value) {
@@ -81,28 +87,22 @@ public final class OptionalBean<T> {
 
     /**
      * 包装一个不能为空的 bean
-     *
      * @param value
      * @param <T>
      * @return
      */
     public static <T> OptionalBean<T> of(T value) {
-
         return new OptionalBean<>(value);
-
     }
 
     /**
      * 包装一个可能为空的 bean
-     *
      * @param value
      * @param <T>
      * @return
      */
     public static <T> OptionalBean<T> ofNullable(T value) {
-
         return value == null ? empty() : of(value);
-
     }
 
     /**
@@ -111,7 +111,6 @@ public final class OptionalBean<T> {
      */
     public T get() {
         return Objects.isNull(value) ? null : value;
-
     }
 
     /**
@@ -127,28 +126,21 @@ public final class OptionalBean<T> {
 
     /**
      * 如果目标值为空 获取一个默认值
-     *
      * @param other
      * @return
      */
-
     public T orElse(T other) {
         return value != null ? value : other;
     }
 
     /**
      * 如果目标值为空 通过lambda表达式获取一个值
-     *
      * @param other
      * @return
      */
-
     public T orElseGet(Supplier<? extends T> other) {
-
         return value != null ? value : other.get();
-
     }
-
     /**
      * 如果目标值为空 抛出一个异常
      *
@@ -157,43 +149,28 @@ public final class OptionalBean<T> {
      * @return
      * @throws X
      */
-
     public <X extends Throwable>
 
     T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
-
         if (value != null) {
-
             return value;
-
         } else {
-
             throw exceptionSupplier.get();
-
         }
-
     }
 
     public boolean isPresent() {
-
         return value != null;
-
     }
 
     public void ifPresent(Consumer<? super T> consumer) {
-
         if (value != null)
-
             consumer.accept(value);
-
     }
 
     @Override
-
     public int hashCode() {
-
         return Objects.hashCode(value);
-
     }
 
     /**
@@ -202,24 +179,16 @@ public final class OptionalBean<T> {
      * @param <T>
      * @return
      */
-
     public static <T> OptionalBean<T>
-
     empty() {
-
         @SuppressWarnings("unchecked")
-
         OptionalBean none = (OptionalBean) EMPTY;
-
         return none;
-
     }
-
-
 }
 
 @Data
-class User {
+class UserDemo {
     private String name;
     private String gender;
     private School school;

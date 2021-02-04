@@ -2,8 +2,13 @@ package com.cun.plus;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.cun.plus.entity.Student;
+import com.cun.plus.entity.StudentClass;
 import com.cun.plus.entity.User;
+import com.cun.plus.mapper.StudentClassMapper;
+import com.cun.plus.mapper.StudentMapper;
 import com.cun.plus.mapper.UserMapper;
+import com.cun.plus.util.npe.OptionalBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,25 +30,47 @@ public class PlusApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private StudentMapper studentMapper;
 
+
+    @Autowired
+    private StudentClassMapper studentClassMapper;
     /**
      * 1、增加 insert
      */
     @Test
     public void insertTest() {
         User user = new User();
-        user.setUsername("绿茶");
-        user.setPassword("lvcha");
-        // 返回对数据库影响操作数：1
-        Integer insert1 = userMapper.insert(user); // 非空属性才会出现在 sql 中
-        // 可以立刻获取插入新记录的 id
-        System.out.println(user.getId());
+        user.setUsername("王五用户");
+        user.setPassword("王五用户的密码");
+        if( OptionalBean.ofNullable(user).isPresent()){
+            // 返回对数据库影响操作数：1
+            Integer insert1 = userMapper.insert(user); // 非空属性才会出现在 sql 中
+            // 可以立刻获取插入新记录的 id
+            System.out.println(user.getId());
+        }
         // 同上
         Integer insert2 = userMapper.insertAllColumn(user); // 所有属性都会出现在 sql 中
         // 同上
         System.out.println(user.getId());
+
+        Student student = new Student();
+        student.setName("王五学生");
+        studentMapper.insert(student);
     }
 
+    @Test
+    public void insertTest2() {
+        Student student = new Student();
+        student.setName("王五学生");
+        studentMapper.insert(student);
+    }
+    @Test
+    public void selectById() {
+        StudentClass studentClass = studentClassMapper.selectById(6);
+        System.out.println(studentClass);
+    }
     /**
      * 2、修改 update
      */

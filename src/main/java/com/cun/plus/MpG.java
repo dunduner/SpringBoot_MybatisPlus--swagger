@@ -94,7 +94,7 @@ public class MpG {
         strategy.setLogicDeleteFieldName("deleted");
         //.setTablePrefix("tb_")// 此处可以修改为您的表前缀
         // ********设置要映射的表名 ********设置要映射的表名 ********设置要映射的表名 ********设置要映射的表名
-        strategy.setInclude(new String[]{"student"}); // 需要生成的表.如果需要生成所有的, 注释掉此行就可以
+        strategy.setInclude(new String[]{"success_killed"}); // 需要生成的表.如果需要生成所有的, 注释掉此行就可以
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
 
         // 自动填充配置
