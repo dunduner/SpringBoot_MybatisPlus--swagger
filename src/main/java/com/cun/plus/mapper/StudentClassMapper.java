@@ -4,10 +4,7 @@ package com.cun.plus.mapper;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.cun.plus.entity.StudentClass;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
 
-@Mapper
-@Repository
 public interface StudentClassMapper extends BaseMapper<StudentClass> {
     /**
      * 一对多

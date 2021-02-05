@@ -2,8 +2,10 @@ package com.cun.plus.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.cun.plus.entity.Student;
-import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -15,8 +17,6 @@ import java.util.List;
  * @author Zhang.ning
  * @since 2021-02-03
  */
-@Mapper
-@Repository
 public interface StudentMapper extends BaseMapper<Student> {
 
     @Results(id="resMap",value = {

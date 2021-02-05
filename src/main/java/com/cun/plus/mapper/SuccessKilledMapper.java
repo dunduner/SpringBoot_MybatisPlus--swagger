@@ -2,8 +2,6 @@ package com.cun.plus.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.cun.plus.entity.SuccessKilled;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -13,8 +11,8 @@ import org.springframework.stereotype.Repository;
  * @author Zhang.ning
  * @since 2021-02-04
  */
-@Mapper
-@Repository
+//@Mapper
+//@Repository
 public interface SuccessKilledMapper extends BaseMapper<SuccessKilled> {
 
 }

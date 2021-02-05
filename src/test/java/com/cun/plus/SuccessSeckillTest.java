@@ -22,13 +22,12 @@ public class SuccessSeckillTest {
     @Test
     public void insertTest2() {
         SuccessKilled successKilled = new SuccessKilled();
-        successKilled.setSeckillId(76867876L);
+        successKilled.setSeckillId(123L);
         successKilled.setUserPhone(13623232323L);
         successKilled.setState(1);
         try {
             successKilledMapper.insert(successKilled);
         } catch (RuntimeException ex) {
-
             System.out.println( "==="+ ex.getMessage());
         }
 
