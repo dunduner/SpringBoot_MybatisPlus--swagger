@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface StudentClassMapper extends BaseMapper<StudentClass> {
-
-
     /**
      * 一对多
      * @param classID
