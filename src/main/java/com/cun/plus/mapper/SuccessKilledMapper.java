@@ -11,8 +11,5 @@ import com.cun.plus.entity.SuccessKilled;
  * @author Zhang.ning
  * @since 2021-02-04
  */
-//@Mapper
-//@Repository
 public interface SuccessKilledMapper extends BaseMapper<SuccessKilled> {
-
 }
